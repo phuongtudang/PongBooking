@@ -7,13 +7,13 @@ class RestaurantList extends Component {
     return this.props.restaurants.map(restaurant => {
       return (
         <div
-          style={{ height: '160px' }}
-          className="card horizontal"
+          style={{ height: '160px', border: 'solid #ebc074 2px' }}
+          className="card horizontal z-depth-0"
           key={restaurant.id}
         >
           <div className="card-image">
             <img
-              style={{ height: '160px', width: '160px' }}
+              style={{ height: '100%', width: '160px' }}
               src={restaurant.image_url}
             />
           </div>
@@ -23,9 +23,7 @@ class RestaurantList extends Component {
                 <span className="card-title">{restaurant.name}</span>
               </a>
               <span className="right">
-                <GoingButton
-                  id={restaurant.id}
-                />
+                <GoingButton id={restaurant.id} />
               </span>
               <p>{restaurant.review_count} Reviews</p>
               <p>{restaurant.categories[0].title}</p>

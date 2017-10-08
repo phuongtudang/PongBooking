@@ -5,9 +5,9 @@ import { updateGoing, fetchUser } from '../actions';
 
 class GoingButton extends Component {
   onClickSubmit(event) {
-    this.props.updateGoing(event).then(setTimeout(this.props.fetchUser, 700));
+    this.props.updateGoing(event).then(setTimeout(this.props.fetchUser, 500));
     if (!this.props.auth.going) {
-      Alert.warning('You need to login first!', {
+      Alert.warning('You need to signin first!', {
         position: 'top-right',
         effect: 'bouncyflip',
         offset: 50
@@ -24,10 +24,12 @@ class GoingButton extends Component {
     }
     return (
       <a
-        className="btn-flat orange lighten-2"
+        className="btn-flat orange lighten-1"
         onClick={this.onClickSubmit.bind(this, this.props.id)}
       >
-        {toggle ? 'Click to cancel' : 'Click to go'}
+        <span className="white-text">
+          {toggle ? 'Click to cancel' : 'Click to go'}
+        </span>
       </a>
     );
   }

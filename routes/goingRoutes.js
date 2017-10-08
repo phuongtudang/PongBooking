@@ -8,7 +8,6 @@ module.exports = app => {
     const userGoing = req.user.going;
     userGoing.includes(restaurant)? userGoing.remove(restaurant) : userGoing.push(restaurant);
     const user = await req.user.save();
-    console.log(user);
     res.send(user);
   });
 };
