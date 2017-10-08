@@ -7,16 +7,17 @@ class Header extends Component {
       case null:
         return;
       case false:
-        return (
+        return [
+          <li><i class="fa fa-twitter fa-2x" /></li>,
           <li>
-            <a href="/auth/twitter" className="btn blue">
+            <a style={{ fontSize: "18px" }} href="/auth/twitter">
               Sign in with Twitter
             </a>
           </li>
-        );
+        ];
       default:
         return [
-          <li key="name">Sign in as {this.props.auth.twitterDisplayName}</li>,
+          <li style={{ fontSize: "18px" }} key="name">Sign in as {this.props.auth.twitterDisplayName}</li>,
           <li key="logout">
             <a href="/api/logout" className="btn blue">
               Logout

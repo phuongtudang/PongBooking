@@ -27,11 +27,11 @@ class SearchBar extends Component{
         <div className="row">
           <input
             placeholder="Enter your city here.."
-            className="form-control col s11"
+            className="form-control col s10"
             value={this.state.term}
             onChange={this.onInputChange}
           />
-          <button type="submit" className="btn col s1">Submit</button>
+          <button type="submit" className="btn green col s2">Submit</button>
         </div>
       </form>
     )

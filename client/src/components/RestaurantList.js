@@ -19,13 +19,15 @@ class RestaurantList extends Component {
           </div>
           <div className="card-stacked">
             <div className="card-content">
-              <span className="card-title">{restaurant.name}</span>
+              <a href={restaurant.url} target="_blank">
+                <span className="card-title">{restaurant.name}</span>
+              </a>
               <span className="right">
                 <GoingButton
                   id={restaurant.id}
                 />
               </span>
-              <p>{restaurant.review_count} Review</p>
+              <p>{restaurant.review_count} Reviews</p>
               <p>{restaurant.categories[0].title}</p>
               <p>
                 Address: {restaurant.location.address1},{' '}
@@ -43,8 +45,8 @@ class RestaurantList extends Component {
   }
 }
 
-function mapStateToProps({ restaurants, auth }) {
-  return { restaurants, auth };
+function mapStateToProps({ restaurants }) {
+  return { restaurants };
 }
 
 export default connect(mapStateToProps)(RestaurantList);
