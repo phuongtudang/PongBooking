@@ -1,44 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import Alert from 'react-s-alert';
-import { updateGoing, fetchUser } from '../actions';
+import * as actions from '../actions';
 
 class GoingButton extends Component {
-  onClickSubmit(event) {
-    this.props.updateGoing(event).then(setTimeout(this.props.fetchUser, 500));
-    if (!this.props.auth.going) {
-      Alert.warning('You need to signin first!', {
-        position: 'top-right',
-        effect: 'bouncyflip',
-        offset: 50
-      });
+  componentWillUpdate(nextProps) {
+    if (nextProps.auth) {
+      nextProps.fetchUser();
     }
   }
 
-  render() {
-    let toggle = false;
-    if (!this.props.auth.going) {
-      toggle = false;
-    } else if (this.props.auth.going.includes(this.props.id)) {
-      toggle = true;
+  goingButton() {
+    if (!this.props.auth) {
+      return <a>Sign In to book</a>;
+    } else if (this.props.auth.going.includes(this.props.restaurantId)) {
+      return (
+        <a
+          className="btn-flat red lighten-1 white-text"
+          onClick={() => this.props.updateCancel(this.props.restaurantId)}
+        >
+          CANCEL
+        </a>
+      );
     }
     return (
       <a
-        className="btn-flat orange lighten-1"
-        onClick={this.onClickSubmit.bind(this, this.props.id)}
+        className="btn-flat orange lighten-1 white-text"
+        onClick={() => this.props.updateGoing(this.props.restaurantId)}
       >
-        <span className="white-text">
-          {toggle ? 'Click to cancel' : 'Click to go'}
-        </span>
+        BOOK
       </a>
     );
   }
+
+  render() {
+    return <span>{this.goingButton()}</span>;
+  }
 }
 
-function mapStateToProps({ auth }) {
-  return { auth };
+function mapStateToProps({ auth, going, cancel }) {
+  return { auth, going, cancel };
 }
 
-export default connect(mapStateToProps, { updateGoing, fetchUser })(
-  GoingButton
-);
+export default connect(mapStateToProps, actions)(GoingButton);

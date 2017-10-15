@@ -6,8 +6,15 @@ module.exports = app => {
   app.post('/api/going', requireLogin, async (req, res) => {
     const { restaurant } = req.body.params;
     const userGoing = req.user.going;
-    userGoing.includes(restaurant)? userGoing.remove(restaurant) : userGoing.push(restaurant);
+    userGoing.push(restaurant);
     const user = await req.user.save();
     res.send(user);
   });
+  app.post('/api/cancel', requireLogin, async (req, res) => {
+    const { restaurant } = req.body.params;
+    const userGoing = req.user.going;
+    userGoing.remove(restaurant);
+    const user = await req.user.save();
+    res.send(user);
+  })
 };

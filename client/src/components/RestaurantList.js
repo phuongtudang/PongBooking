@@ -23,10 +23,10 @@ class RestaurantList extends Component {
                 <span className="card-title">{restaurant.name}</span>
               </a>
               <span className="right">
-                <GoingButton id={restaurant.id} />
+                <GoingButton restaurantId={restaurant.id} />
               </span>
               <p>{restaurant.review_count} Reviews</p>
-              <p>{restaurant.categories[0].title}</p>
+              <p>{restaurant.categories.length === 0 ? 'NA' : restaurant.categories[0].title}</p>
               <p>
                 Address: {restaurant.location.address1},{' '}
                 {restaurant.location.city}
